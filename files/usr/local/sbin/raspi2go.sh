@@ -36,8 +36,8 @@ init_start() {
 
   mkdir -p strings/"$LANG_ID"
   echo "$SERIAL_NO" > strings/"$LANG_ID"/serialnumber
-  echo "$MANUFACTURER" > strings/"$LANG_ID"/manufacturer 
-  echo "$PRODUCT" > strings/"$LANG_ID"/product 
+  echo "$MANUFACTURER" > strings/"$LANG_ID"/manufacturer
+  echo "$PRODUCT" > strings/"$LANG_ID"/product
 
   mkdir -p "configs/c.$C/strings/$LANG_ID"
   echo "$DESCRIPTION" > "configs/c.$C/strings/$LANG_ID/configuration"
@@ -105,6 +105,19 @@ create_hid() {
   ln -s "functions/hid.$NODE" "configs/c.$C/"
 }
 
+create_audio() {
+  mkdir -p "functions/uac2.$NODE/"
+
+  echo $USB_UAC2_c_chmask          > functions/uac2.usb0/c_chmask
+  echo $USB_UAC2_c_srate           > functions/uac2.usb0/c_srate
+  echo $USB_UAC2_c_ssize           > functions/uac2.usb0/c_ssize
+  echo $USB_UAC2_p_chmask          > functions/uac2.usb0/p_chmask
+  echo $USB_UAC2_p_srate           > functions/uac2.usb0/p_srate
+  echo $USB_UAC2_p_ssize           > functions/uac2.usb0/p_ssize
+
+  ln -s "functions/uac2.$NODE" "configs/c.$C/"
+}
+
 # ---- main program   --------------------------------------------------------
 
 # source configuration file
@@ -124,6 +137,7 @@ init_start
 [ "$USB_SERIAL" = 1 ]       && create_serial
 [ "$USB_ETHERNET" = 1 ]     && create_network
 [ "$USB_HID" = 1 ]          && create_hid
+[ "$USB_UAC2" = 1 ]          && create_audio
 
 init_end
 
