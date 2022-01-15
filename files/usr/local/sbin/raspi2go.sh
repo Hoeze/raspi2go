@@ -108,12 +108,12 @@ create_hid() {
 create_audio() {
   mkdir -p "functions/uac2.$NODE/"
 
-  echo $USB_UAC2_c_chmask          > functions/uac2.usb0/c_chmask
-  echo $USB_UAC2_c_srate           > functions/uac2.usb0/c_srate
-  echo $USB_UAC2_c_ssize           > functions/uac2.usb0/c_ssize
-  echo $USB_UAC2_p_chmask          > functions/uac2.usb0/p_chmask
-  echo $USB_UAC2_p_srate           > functions/uac2.usb0/p_srate
-  echo $USB_UAC2_p_ssize           > functions/uac2.usb0/p_ssize
+  echo $USB_UAC2_c_chmask          > functions/uac2.$NODE/c_chmask
+  echo $USB_UAC2_c_srate           > functions/uac2.$NODE/c_srate
+  echo $USB_UAC2_c_ssize           > functions/uac2.$NODE/c_ssize
+  echo $USB_UAC2_p_chmask          > functions/uac2.$NODE/p_chmask
+  echo $USB_UAC2_p_srate           > functions/uac2.$NODE/p_srate
+  echo $USB_UAC2_p_ssize           > functions/uac2.$NODE/p_ssize
 
   ln -s "functions/uac2.$NODE" "configs/c.$C/"
 }
